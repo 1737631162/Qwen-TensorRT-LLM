@@ -556,7 +556,7 @@
 9.cd examples\qwen2  
 10.复制huggingface的qwen权重过来（比如1.8b的权重https://huggingface.co/Qwen/Qwen-1_8B-Chat），修改default_config中对应名称  
 11.pip install -r requirements.txt  
-12. 编译fp16 Engine  
+12.编译fp16 Engine  
 python build.py --remove_input_padding --enable_context_fmha  
 13.试运行  
 python run.py  
