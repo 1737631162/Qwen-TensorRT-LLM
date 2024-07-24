@@ -537,6 +537,36 @@
 <p><a href="https://github.com/Tlntin/Qwen-7B-Chat-TensorRT-LLM/assets/28218658/940c1ed1-14f7-45f6-bf13-67c8f289c956">https://github.com/Tlntin/Qwen-7B-Chat-TensorRT-LLM/assets/28218658/940c1ed1-14f7-45f6-bf13-67c8f289c956</a></p>
 </details>
 
+# windows版本适配（for qwen1.5）
+**准备工作**
+1.一张英伟达显卡，8GB以上显存，30系/40系新卡。  
+2.安装了英伟达显卡驱动，版本大于等于530。  
+3.安装了cuda，这里推荐12.1（主要跟着pytorch需要的cuda版本走，并且trt-llm需要cuda>=12）官网链接，下载后双击安装即可，安装位置默认即可。  
+4.安装cudnn，一般来说选最新的就可以了，这里我选择8.9.7，官网链接，这里需要登录才能下载。将cudnn的压缩包解压，找到cuda的安装目录，比如我的cuda12.1是安装在C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1目录，然后你将cudnn里面的对应目录的文件复制到对应文件夹即可。下面是一个简单的例子：  
+
+将cudnn-windows-x86_64-8.9.7.29_cuda12-archive\bin目录下面的dll文件，复制到C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\bin目录下面  
+将cudnn-windows-x86_64-8.9.7.29_cuda12-archive\include目录下面的.h文件，复制到C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\include目录下面  
+将cudnn-windows-x86_64-8.9.7.29_cuda12-archive\lib\x64目录下面的.lib文件，复制到C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\lib\x64目录下面  
+5. 安装anaconda  
+6.conda install -y mpi4py  
+7.pip install tensorrt_llm==0.8.0 --extra-index-url https://pypi.nvidia.com --extra-index-url https://download.pytorch.org/whl/cu121  
+8.git clone https://github.com/Tlntin/Qwen-TensorRT-LLM.git  
+9.cd examples\qwen2  
+10.复制huggingface的qwen权重过来（比如1.8b的权重https://huggingface.co/Qwen/Qwen-1_8B-Chat），修改default_config中对应名称  
+11.pip install -r requirements.txt  
+12. 编译fp16 Engine  
+python build.py --remove_input_padding --enable_context_fmha  
+13.试运行  
+python run.py  
+14.运行终端chat  
+python cli_chat.py  
+15.运行api  
+python3 api.py  
+
+# 再开一个终端运行web_demo.py(此demo依赖上面的api.py)
+# 然后访问：http://localhost:7860/
+python3 web_demo.py
+
 # 进阶工作
 
 1. 参考该教程部署tritonserver：[Triton24.02部署TensorRT-LLM,实现http查询](./docs/triton_deploy_trt-llm.md)
