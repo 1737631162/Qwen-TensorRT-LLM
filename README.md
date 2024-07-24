@@ -547,6 +547,7 @@
 将cudnn-windows-x86_64-8.9.7.29_cuda12-archive\bin目录下面的dll文件，复制到C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\bin目录下面  
 将cudnn-windows-x86_64-8.9.7.29_cuda12-archive\include目录下面的.h文件，复制到C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\include目录下面  
 将cudnn-windows-x86_64-8.9.7.29_cuda12-archive\lib\x64目录下面的.lib文件，复制到C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\lib\x64目录下面  
+
 5. 安装anaconda  
 6.conda install -y mpi4py  
 7.pip install tensorrt_llm==0.8.0 --extra-index-url https://pypi.nvidia.com --extra-index-url https://download.pytorch.org/whl/cu121  
